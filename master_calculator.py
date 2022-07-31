@@ -225,13 +225,14 @@ SPLITS INTO CASES DEPENDING ON RTP OFFERED BY SPECIFIED ODDS.
 UNDER NORMAL CIRCUMSTANCES THE FIRST CASE WILL COME INTO PLAY.
 """
 epsilon = 0.001
+rtp = return_to_player(odds_1, odds_X, odds_2)
 
-if return_to_player(odds_1, odds_X, odds_2) < 1:
+if rtp < 1:
     store_odds_1 = odds_1
     store_odds_X = odds_X
     store_odds_2 = odds_2
 
-elif return_to_player(odds_1, odds_X, odds_2) == 1:
+elif rtp == 1:
     store_odds_1 = odds_1
     store_odds_X = odds_X
     store_odds_2 = odds_2
@@ -245,8 +246,6 @@ else:
     store_odds_1 = odds_1
     store_odds_X = odds_X
     store_odds_2 = odds_2
-
-    rtp = return_to_player(odds_1, odds_X, odds_2)
 
     # FOR THE ALGORITHM TO CONVERGE, ODDS ARE ADJUSTED SUCH THAT RTP FALLS BELOW 1
     odds_1 = odds_1 / (rtp + epsilon)
