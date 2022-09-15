@@ -97,6 +97,33 @@ def rfbet_3way(stake: int, odds: float, odds_second_outcome: float, odds_third_o
     return [stake_outcome2, stake_outcome3]
 
 
+def exchange_calculator(stake, odds, lay_odds, bet_type, exchange_fee=0.02) -> int:
+    """
+    Computes how much to lay to make sure the back bet is fully hedged
+
+    :param float stake: Stake wagered on the given outcome
+    :param float odds: Odds on the given bet
+    :param float lay_odds: Lay odds offered with the betting exchange on the given outcome
+    :param str bet_type: QB/FB/RFB, must be in the list ["Qualifying bet", "Freebet", "Risk-free bet"]
+    :param float exchange_fee: Fee applied by the betting exchange, 0.02 by default
+
+    :return: Stake to be layed to neutralize position
+    :rtype: int
+    """
+    if bet_type == "Qualifying bet":
+        lay_stake = int(stake * odds / (lay_odds_betting_exchange - exchange_fee))
+        return lay_stake
+    elif bet_type == "Freebet":
+        lay_stake = int(stake * (odds - 1) / (lay_odds_betting_exchange - exchange_fee))
+        return lay_stake
+    elif bet_type == "Risk-free bet":
+        lay_stake = int(stake * (odds - 1) / (lay_odds_betting_exchange - exchange_fee))
+        return lay_stake
+    else:
+        raise Exception(
+            f'{bet_type} must be either "Qualifying bet", "Freebet" or "Risk-free bet"')
+
+        
 """
 NECESSARY FUNCTIONS FOR THE MASTER CALCULATOR
 """
@@ -142,6 +169,11 @@ def return_to_player_3way(odds_1: float, odds_X: float, odds_2: float) -> float:
     '''
     return_to_player = 1 / (1 / odds_1 + 1 / odds_X + 1 / odds_2)
     return return_to_player
+
+
+"""
+MASTER CALCULATORS
+"""
 
 
 def master_calculator_2way(wagerB_1, oddsB_1, wagerB_2, oddsB_2,
