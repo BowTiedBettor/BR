@@ -1,1 +1,1 @@
-Python code for calculators up and running at bowtiedbettor.com. 
+Python code for calculators up and running at https://www.bowtiedbettor.com/calculators. 
