@@ -1,9 +1,6 @@
 import scipy.optimize
 
-"""
-Code for calculators running here: https://www.bowtiedbettor.com/calculators
-"""
-
+# Code for calculators running here: https://www.bowtiedbettor.com/calculators
 
 def qualifying_bet_2way(stake: int, odds: float, odds_second_outcome: float) -> float:
     '''
